@@ -1,3 +1,5 @@
+```markdown
+
 ## コマンドプロンプトとは
 
 コンピュータの操作方法には2種類あります。1つ目はマウスを使って視覚的に操作する方法で、**GUI**（Graphical User Interface）と言います。2つ目はマウスを使わずにキーボードからコマンドを打ち込んで操作する方法で、**CLI**（Command-Line Interface）と言います。
@@ -238,4 +240,6 @@ C:\Users\pc-000507> ping www.kogasoftware.com
 
 C:\Users\pc-000507> C:\Windows\system32\PING.EXE www.kogasoftware.com
 <出力省略>
+```
+
 ```
