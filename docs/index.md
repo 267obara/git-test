@@ -1,37 +1,241 @@
-## Welcome to GitHub Pages
+## コマンドプロンプトとは
 
-You can use the [editor on GitHub](https://github.com/267obara/git-test/edit/main/docs/index.md) to maintain and preview the content for your website in Markdown files.
+コンピュータの操作方法には2種類あります。1つ目はマウスを使って視覚的に操作する方法で、**GUI**（Graphical User Interface）と言います。2つ目はマウスを使わずにキーボードからコマンドを打ち込んで操作する方法で、**CLI**（Command-Line Interface）と言います。
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+普段PCを使うときには、マウスでアイコンをダブルクリックしたり、ボタンをクリックしたりすることが多いと思います。つまりGUIで操作しているわけです。これに対して、ITエンジニアになるとCLIでコンピュータを操作する機会が増えます。システムの開発や運用を行う際はCLIの方が便利なのです。例えばCLIは、GUIよりも細やかな操作が可能だったり、使えるツールがGUIよりも豊富だったりします。
 
-### Markdown
+WindowsのCLIには**コマンドプロンプト**とPowerShellがあります。新人研修ではコマンドプロンプトを使用します。このページでコマンドプロンプトの基本を身につけましょう。
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+コマンドプロンプトを起動します。
 
-```markdown
-Syntax highlighted code block
+1. `Windowsキー + Rキー` で「ファイル名を指定して実行」を開く
+1. `cmd.exe` を入力して実行
 
-# Header 1
-## Header 2
-### Header 3
+黒い画面に白い文字のウィンドウが開きます。これがコマンドプロンプトです。
 
-- Bulleted
-- List
+## コマンドプロンプトの使い方
 
-1. Numbered
-2. List
+### 基本：コマンドの実行とキャンセル
 
-**Bold** and _Italic_ and `Code` text
+コマンドプロンプトを開くと、小さな白い長方形が点滅している箇所があります。この場所でコマンドプロンプトはキー入力を待っています。キーボードでコマンドを入力し、Enterキーで実行します。コマンドに応じた処理が行われ、コマンドの種類によっては結果が出力されます。これが基本の流れです。
 
-[Link](url) and ![Image](src)
+コマンドの入力途中でキャンセルする、あるいは実行が始まったコマンドを中止するには `Ctrl + C` を入力します。CtrlキーとCキーを同時押しするという意味です。ぴったり同時である必要はなく、Ctrlキーを押さえながらCキーを押す感じでOKです。
+
+なお、行の頭に表示されている `C:\Users\pc-000507` の文字は、あなたが今いるディレクトリを表しています。これは**カレントディレクトリ**と言います。
+
+### 練習：ファイルとディレクトリの操作
+
+以下の例に従い、コマンドプロンプトにコマンドを入力し実行して下さい。
+
+#### `mkdir`（ディレクトリの作成）
+
+カレントディレクトリの下にtestという名前のディレクトリを作成します。
+
+```cmd
+C:\Users\pc-000507> mkdir test
 ```
 
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
+#### `cd`（カレントディレクトリの変更）
 
-### Jekyll Themes
+testディレクトリの中に移動します。入力行の頭に表示されているカレントディレクトリも変わります。
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/267obara/git-test/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+```cmd
+C:\Users\pc-000507> cd test
 
-### Support or Contact
+C:\Users\pc-000507\test> 
+```
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+#### `dir`（ディレクトリの中身を表示）
+
+testディレクトリは作ったばかりなので中身は空です。何も表示されませんがこれでOKです。
+
+```cmd
+C:\Users\pc-000507\test> dir /B
+
+C:\Users\pc-000507\test> 
+```
+
+dirコマンドの後に `/B` をつけています。これはコマンドの動作を指定するためのもので、コマンドラインオプションと言います。どのコマンドにも様々なオプションが用意されています。オプションを組み合わせることで、コマンドに最適な動きをさせることができます。上の例では、dirコマンドの `/B` オプションは、出力を簡略化する指定です。
+
+#### `echo`（指定したテキストを出力する）
+
+echoコマンドは後に続くテキストをそのまま表示するコマンドです（echoはこだまという意味）。これに「> ファイル名」を付けると動きが変わり、テキストをファイルに書き込むようになります。テキストの出力先が画面からファイルへと切り替わるわけです。このような「`>`」の使い方を**リダイレクト**と言います。今回のように、書き込む先のファイルが存在しない場合は、自動的に新規作成されます。
+
+```cmd
+C:\Users\pc-000507\test> echo This is a test file. > test.txt
+```
+
+dirコマンドでファイルが作成されたことを確認します。
+```cmd
+C:\Users\pc-000507\test> dir /B
+test.txt
+
+C:\Users\pc-000507\test>
+```
+
+#### `type`（テキストファイルの中身を表示）
+
+```cmd
+C:\Users\pc-000507\test> type test.txt
+This is a test file.
+
+C:\Users\pc-000507\test>
+```
+
+echoコマンドでテキストをもう一行追記してみましょう。さっきのechoコマンドの「`>`」を「`>>`」にすると、既存の内容の後に続けて書き込むことができます。終わったらtypeコマンドで確認します。
+
+```cmd
+C:\Users\pc-000507\test> echo Second line appended. >> test.txt
+
+C:\Users\pc-000507\test> type test.txt
+This is a test file.
+Second line appended.
+
+C:\Users\pc-000507\test>
+```
+
+#### `del`（ファイルを削除）
+
+delコマンドでファイルを削除します。削除したらdirコマンドでファイルが無くなったことを確認します。
+
+```cmd
+C:\Users\pc-000507\test> del test.txt
+
+C:\Users\pc-000507\test> dir /B
+
+C:\Users\pc-000507\test>
+```
+
+#### `rmdir`（ディレクトリを削除）
+
+一段上のディレクトリに戻ってから、testディレクトリを削除します。「`..`」はカレントディレクトリの一つ上（親ディレクトリ）を指定する書き方です。また、今回は使う機会がありませんでしたが、カレントディレクトリそのものは「`.`」で指定することができます。
+```cmd
+C:\Users\pc-000507\test> cd ..
+
+C:\Users\pc-000507> rmdir test
+
+C:\Users\pc-000507>
+```
+
+#### `exit`（コマンドプロンプトを閉じる）
+
+```cmd
+C:\Users\pc-000507> exit
+```
+
+以上でファイル操作の練習は終わりです。
+
+## 付録1：GUIとCLIを見比べる
+
+ファイルやディレクトリの操作は、GUIとCLIのどちらから行っても結果は同じです。これを体験しましょう。もう一度コマンドプロンプトを開いて、以下のように実行して下さい。
+
+```cmd
+C:\Users\pc-000507> explorer.exe .
+```
+
+GUIのファイルエクスプローラが起動し、コマンドプロンプトのカレントディレクトリと同じ場所（上の例では `C:\Users\pc-000507`）が開かれます。ファイルエクスプローラとコマンドプロンプトを見比べながら、上のファイル操作練習をもう一度行ってみて下さい。CLIでファイルやディレクトリを作成すると、それがGUIの方にも出現します。GUIとCLIの違いとは、手段の違いに過ぎず、操作する対象や結果は同じだということを理解して下さい。
+
+## 付録2：CLIからアプリを実行する
+
+上でCLIからファイルエクスプローラを起動できたことから分かるように、アプリケーションの起動もGUIとCLIの両方から行うことができます。例えばWebブラウザやExcelは、普段はGUIのアイコンをクリックして起動していると思いますが、CLIから起動することもできます。以下のコマンドを実行してみましょう。
+
+```cmd
+C:\Users\pc-000507> notepad.exe
+
+C:\Users\pc-000507> calc.exe
+
+C:\Users\pc-000507> MicrosoftEdge.exe
+
+C:\Users\pc-000507> "C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE"
+```
+
+これらのアプリケーションは、起動した後の操作は全てGUIで行うように作られています。これらは**デスクトップアプリ**と言って、初めからGUI向けに作られています。これに対して、初めからCLIで使うように作られているアプリケーションもあり、**コマンドラインアプリ**と言います。ITエンジニアが使用するツールにはコマンドラインアプリが少なくありません。Windowsに標準装備されているコマンドラインアプリを使ってみましょう。
+
+#### curl.exe
+
+Webページを取得するプログラムです。ページはCLIにテキストとして出力されるだけで、Webブラウザのように綺麗に表示することはできません（それはGUIの領分です）。オプションの付け方によって、メールを送ったりファイルを転送したりと色々なことに使えます。
+
+当社のWebサイトのトップページを取得してみましょう。
+
+```cmd
+C:\Users\pc-000507> curl.exe https://www.kogasoftware.com/
+<出力省略>
+```
+
+#### nslookup.exe
+
+Webサイトなどのドメイン名（`www.kogasoftware.com`など）をもとに、IPアドレスを問い合わせるプログラムです。（この手続きは**名前解決**と言います）
+
+当社のWebサイトのIPアドレスを問い合わせてみましょう。
+
+```cmd
+C:\Users\pc-000507> nslookup.exe www.kogasoftware.com
+<出力省略>
+```
+
+#### PING.EXE
+
+Webサイトなどのドメイン名またはIPアドレスに対してパケットを送信し、それが返ってくるまでの時間を測定するプログラムです。（PINGを打つ、PINGが返ってくる、などと言います）
+
+当社のWebサイトと、地球の裏側にあるパラグアイの公式WebサイトにそれぞれPINGを送り、所要時間を比較してみましょう。
+
+```cmd
+C:\Users\pc-000507> PING.EXE www.kogasoftware.com
+<出力省略>
+
+C:\Users\pc-000507> PING.EXE www.paraguay.gov.py
+<出力省略>
+```
+
+最後に、Windowsの特徴として、プログラム名は大文字と小文字のどちらでも実行でき、また末尾の「`.exe`」を省略することができます。このため、例えば上記の `PING.EXE` は単に `ping` でも実行できます。よく使われるのは `ping` の方です。
+
+## 付録3：ファイルパスについて
+
+GUIでファイルを操作する場合は、目的のファイルのアイコンをマウスで操作します。CLIの場合はマウスが使えませんので、目的のファイルを文字で指定しなければなりません。また、コンピュータの中には同じ名前のファイルが複数存在することもありますから、目的のファイルを一意に特定できる形で指定する必要があります。ファイルはディレクトリの中にあり、ディレクトリは階層構造になっています。そこで、ディレクトリ階層の一番上を始点にして、目的のファイルまでの経路を指定するという方法が使われます。この方式を**絶対パス**と言います。パスは経路という意味です。
+
+例として、上でExcelをCLIから起動したときの「`C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE`」は絶対パスです。経由するディレクトリをバックスラッシュ（`\`）で繋げて書いています。
+1. `C:\` （階層構造の頂点。**ルートディレクトリ**と言う）
+1. `Program Files` （1層目のディレクトリ）
+1. `Microsoft Office` （2層目のディレクトリ）
+1. `root` （3層目のディレクトリ）
+1. `Office16` （4層目のディレクトリ）
+1. `EXCEL.EXE` （↑の中に存在する目的のファイル）
+
+先に行ったコマンドプロンプトの練習では、目的のファイルやディレクトリを指定する際に絶対パスを使用せず、「`test`」「`test.txt`」「`..`」といった形式で指定していました。これは、ファイルまでの経路をカレントディレクトリを始点にして指定する方法です。この方式は**相対パス**と言います。先の練習では、目的のファイルがカレントディレクトリの直下にありましたので、他のディレクトリを経由せずに「`test.txt`」だけで指定できたわけです。ディレクトリを経由する相対パスも可能です。例えば、先の練習を `cd` コマンドを使わずに、つまりカレントディレクトリを `C:\Users\pc-000507` から変えずに実行するときは、目的のファイルを「`test\test.txt`」で指定します。
+1. `test` （カレントディレクトリを基準として1層目のディレクトリ）
+1. `test.txt` （↑の中に存在する目的のファイル）
+```cmd
+C:\Users\pc-000507> mkdir test
+
+C:\Users\pc-000507> echo This is a test file. > test\test.txt
+
+C:\Users\pc-000507> type test\test.txt
+This is a test file.
+
+<以降省略>
+```
+
+絶対パスと相対パスを説明しました。これらを合わせて**ファイルパス**と言います。
+
+## 付録4：サーチパスについて
+
+付録2でCLIからプログラムを実行したときの指定方法を思い出して下さい。「`notepad.exe`」「`PING.EXE`」のように、ファイル名だけでプログラムを実行していました。指定方法が相対パスに似ています。これらのプログラムはカレントディレクトリに存在しないのですが、なぜ相対パスのようにファイル名だけで指定することができるのでしょうか。これはWindowsの**サーチパス**という機能によります。.exeファイルを含むディレクトリをサーチパスに登録しておくと、ファイル名だけで実行できるようになります。今回の場合、「`notepad.exe`」「`PING.EXE`」のファイルが存在する `C:\Windows\system32` というディレクトリがサーチパスに登録されているので、ファイル名だけで実行できるわけです。.exeファイルを多く含むディレクトリはサーチパスに登録することが多いです。
+
+サーチパスに登録されているディレクトリの一覧を表示してみましょう。サーチパスは、Windowsの**Path**という環境変数に格納されています。ディレクトリ名がセミコロン（`;`）区切りで結合されているので見づらいですが、 `C:\Windows\system32` が含まれていることを確認して下さい。環境変数の中身は以下のように `echo` コマンドで出力することができます。
+```cmd
+C:\Users\pc-000507> echo %Path%
+<出力省略>
+
+C:\Users\pc-000507>
+```
+
+ディレクトリをサーチパス（Path環境変数）に登録することを「パスを通す」「パスを登録する」と言います。「パス」という言葉がファイルパスとサーチパスのどちらを指すかは文脈によります。
+
+なお、.exeファイルを絶対パスまたは相対パスで指定すれば、サーチパスに頼らずにプログラムを実行することができます。例えば、pingは以下のどちらでも実行できます。
+```cmd
+C:\Users\pc-000507> ping www.kogasoftware.com
+<出力省略>
+
+C:\Users\pc-000507> C:\Windows\system32\PING.EXE www.kogasoftware.com
+<出力省略>
+```
